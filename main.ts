@@ -1,3 +1,4 @@
+let strip: neopixel.Strip = null
 let IR_waarde = 0
 let vooruit = 133
 let rechts = 197
@@ -9,6 +10,10 @@ basic.forever(function () {
     IR_waarde = IR.IR_read()
 })
 basic.forever(function () {
+    strip = neopixel.create(DigitalPin.P15, 4, NeoPixelMode.RGB)
+    strip.showColor(neopixel.colors(NeoPixelColors.Indigo))
+})
+basic.forever(function () {
     if (IR_waarde == vooruit) {
         basic.showLeds(`
             . . # . .
@@ -17,8 +22,8 @@ basic.forever(function () {
             . . # . .
             . . # . .
             `)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M1, Maqueen_V5.Dir.CW, 100)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M2, Maqueen_V5.Dir.CW, 100)
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 100)
+        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 100)
     }
     if (IR_waarde == rechts) {
         basic.showLeds(`
@@ -28,11 +33,11 @@ basic.forever(function () {
             . . . # .
             . . # . .
             `)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M1, Maqueen_V5.Dir.CW, 100)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M1, Maqueen_V5.Dir.CCW, 100)
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, 145)
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 145)
         basic.pause(399)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M1, Maqueen_V5.Dir.CW, 100)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M2, Maqueen_V5.Dir.CW, 100)
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 100)
+        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 100)
     }
     if (IR_waarde == achteruit) {
         basic.showLeds(`
@@ -42,8 +47,8 @@ basic.forever(function () {
             . # # # .
             . . # . .
             `)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M1, Maqueen_V5.Dir.CCW, 100)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M2, Maqueen_V5.Dir.CCW, 100)
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, 100)
+        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 100)
     }
     if (IR_waarde == links) {
         basic.showLeds(`
@@ -53,11 +58,11 @@ basic.forever(function () {
             . # . . .
             . . # . .
             `)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M1, Maqueen_V5.Dir.CW, 100)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M1, Maqueen_V5.Dir.CCW, 100)
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, 145)
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 145)
         basic.pause(399)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M1, Maqueen_V5.Dir.CW, 100)
-        Maqueen_V5.motorRun(Maqueen_V5.Motors.M2, Maqueen_V5.Dir.CW, 100)
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, 100)
+        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 100)
     }
     if (IR_waarde == stop) {
         basic.showLeds(`
@@ -67,7 +72,7 @@ basic.forever(function () {
             . # # # .
             . . . . .
             `)
-        Maqueen_V5.motorStop(Maqueen_V5.Motors.M2)
-        Maqueen_V5.motorStop(Maqueen_V5.Motors.M1)
+        maqueen.motorStop(maqueen.Motors.M2)
+        maqueen.motorStop(maqueen.Motors.M1)
     }
 })
